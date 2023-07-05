@@ -209,43 +209,43 @@ INSERT INTO picks (pick_number, name, college, picked_by, position)
 INSERT INTO picks (pick_number, name, college, picked_by, position)
 	VALUES(99,"Paul Dawson","TCU","Cincinnati","OLB");
 	
-	
-/* showing the top 10 colleges players are selected from*/
-select college, count(name)
-from picks
-group by college
-order by count(name) desc
-limit 10;
+****************************************************************************************
 
-select count(name), college, picked_by
-from picks
-group by college
-order by count(name) desc;
+/* showing the top 10 colleges players are selected from*/
+SELECT college, COUNT(name)
+FROM picks
+GROUP BY college
+ORDER BY COUNT(name) DESC
+LIMIT 10;
+
+SELECT COUNT(name), college, picked_by
+FROM picks
+GROUP BY college
+ORDER BY count(name) DESC;
 
 /*Find all players from Florida State that were picked by the Saints*/
-select name
-from picks
-where college = "Florida State" and picked_by = "New Orleans";
+SELECT name
+FROM picks
+WHERE college = "Florida State" and picked_by = "New Orleans";
 
 /* Confiring the last query generated correct output*/
-select name, college, picked_by
-from picks
-where name = "P.J. Williams";
+SELECT name, college, picked_by
+FROM picks
+WHERE name = "P.J. Williams";
 
 
 /* What position tends to have a higher vs lower pick number? - What position tends to get 1st round pick, 2nd round pick, and 3rd round pick?
-
 pick_number 1-31 = 1st round pick
 pick_number 32-63 = 2nd round pick
 pick_number 64-104 = 3rd round pick*/
 
-select position, round(avg(pick_number)),
-case
-    when round(avg(pick_number)) <=31 then "1st round pick"
-    when round(avg(pick_number)) between 32 and 63 then "2nd round pick"
-    when round(avg(pick_number)) >=64 then "3rd round pick"
-    else "4th round and up"
-end as "round pick"
-from picks
-group by position
-order by round(avg(pick_number)) asc;
+SELECT position, ROUND(avg(pick_number)),
+CASE
+    WHEN round(avg(pick_number)) <=31 THEN "1st round pick"
+    WHEN round(avg(pick_number)) BETWEEN 32 and 63 THEN "2nd round pick"
+    WHEN round(avg(pick_number)) >=64 THEN "3rd round pick"
+    ELSE "4th round and up"
+END as "round pick"
+FROM picks
+GROUP BY position
+ORDER BY round(avg(pick_number)) ASC;
