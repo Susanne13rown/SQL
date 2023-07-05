@@ -1,2 +1,2 @@
 # sql_sample
-A collection of my sample SQL files. 
+Welcome! Here you will find a collection of my sample SQL files. 
