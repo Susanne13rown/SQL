@@ -1,4 +1,4 @@
-1st 3 rounds of the NFL 2015 Draft
+/* 1st 3 rounds of the NFL 2015 Draft
 Collected by: https://www.khanacademy.org/profile/BobbyandKaren/
 */
 
@@ -211,7 +211,7 @@ INSERT INTO picks (pick_number, name, college, picked_by, position)
 	
 ****************************************************************************************
 
-/* showing the top 10 colleges players are selected from*/
+--#1 Showing the top 10 colleges players are selected from
 SELECT college, COUNT(name)
 FROM picks
 GROUP BY college
@@ -223,18 +223,18 @@ FROM picks
 GROUP BY college
 ORDER BY count(name) DESC;
 
-/*Find all players from Florida State that were picked by the Saints*/
+--#2 Find all players from Florida State that were picked by the Saints
 SELECT name
 FROM picks
 WHERE college = "Florida State" and picked_by = "New Orleans";
 
-/* Confiring the last query generated correct output*/
+--#3 Confiring the last query generated correct output*/
 SELECT name, college, picked_by
 FROM picks
 WHERE name = "P.J. Williams";
 
 
-/* What position tends to have a higher vs lower pick number? - What position tends to get 1st round pick, 2nd round pick, and 3rd round pick?
+/* #4 What position tends to have a higher vs lower pick number? - What position tends to get 1st round pick, 2nd round pick, and 3rd round pick?
 pick_number 1-31 = 1st round pick
 pick_number 32-63 = 2nd round pick
 pick_number 64-104 = 3rd round pick*/
