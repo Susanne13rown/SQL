@@ -115,33 +115,44 @@ INSERT INTO ORDERS VALUES('200133', '1200.00', '400.00', '06/29/2008', 'C00009',
 /*********************************************/
 
 
----------------------------------INNER JOINS---------------------------------
+---------------------------------JOINS---------------------------------
 
---show all orders by customers
+--#1 Show all orders by customers.
 
 SELECT *
 FROM orders INNER JOIN customer
 ON orders.cust_code = customer.cust_code;
 
---show all orders by customers in chronological ORDER
+--#2 Show all orders by customers in chronological ORDER.
 
 SELECT *
-FROM ORDERS INNER JOIN CUSTOMER
-ON orders.cust_code = customer.CUST_CODE
+FROM orders INNER JOIN customer
+ON orders.cust_code = customer.cust_code
 ORDER BY ord_date ASC;
 
---show which customers have paid the most money in descending ORDER
-SELECT ord_num, ord_amount, ord_date, payment_amt, CUST_NAME
-FROM orders as "o" INNER JOIN CUSTOMER as "c"
+--#3 Show which customers have paid the most money in descending order.
+
+SELECT ord_num, ord_amount, ord_date, payment_amt, cust_name
+FROM orders as "o" INNER JOIN customer as "c"
 ON o.cust_code = c.CUST_CODE
 ORDER BY payment_amt DESC;
 
---show which agent made the most commision in order of highest to lowest
+--#4 Show which agent made the most commision (in dollars, not as a percentage) in order of highest to lowest.
 
 SELECT agent_name, payment_amt*commission AS commission_made
 FROM orders as "o"
-JOIN customer as "c" ON o.agent_code = c.AGENT_CODE
-JOIN agents as "a" ON c.agent_code = a.AGENT_CODE
-GROUP BY AGENT_NAME
+JOIN customer as "c" ON o.agent_code = c.agent_code
+JOIN agents as "a" ON c.agent_code = a.agent_code
+GROUP BY agent_name
+ORDER BY commission_made DESC;
+
+--#5 Show which agent made the most commision (in dollars, not as a percentage) in order of highest to lowest during the second half of the fiscal year (which runs from Jun - Dec). 
+
+SELECT ord_date, agent_name, payment_amt*commission AS commission_made
+FROM orders as "o"
+JOIN customer as "c" ON o.agent_code = c.agent_code
+JOIN agents as "a" ON c.agent_code = a.agent_code
+WHERE ord_date >= "06/01/2008"
+GROUP BY agent_name
 ORDER BY commission_made DESC;
 
