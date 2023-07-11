@@ -8,7 +8,7 @@ CREATE TABLE  "AGENTS"
 	"COMMISSION" NUMBER(10,2), 
 	"PHONE_NO" CHAR(15), 
 	"COUNTRY" VARCHAR2(25) 
-	 );
+	 ); 
 
 	 INSERT INTO AGENTS VALUES ('A007', 'Ramasundar', 'Bangalore', '0.15', '077-25814763', '');
 INSERT INTO AGENTS VALUES ('A003', 'Alex ', 'London', '0.13', '075-12458969', '');
