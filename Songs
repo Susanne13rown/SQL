@@ -1,0 +1,55 @@
+/* Table imported using the following CSV file from: https://github.com/socratica/sql/blob/master/songs.csv*/
+
+------------------------------------------------------------------------------------------------------------------
+
+
+--#1 Create an index for artist names
+CREATE INDEX artist_name
+ON songs (artist);
+
+
+--#2 Create an index for song titles
+CREATE INDEX song_name
+ON songs (title);
+
+
+--#3 After creating that index, how many songs out of the 10,000 listed are titled "Forever"?
+SELECT COUNT (*)
+FROM songs
+WHERE title = "Forever";
+
+
+/* #4 Let's say these songs are for a karaoke book, and you're going to sift through them to find the song you want to sing. You really want to sing "Forever," but want to know how many songs you need to sift through until you find it in the karaoke book*/
+SELECT COUNT(title)
+FROM songs
+Where title BETWEEN "At Last" AND "Forever";
+
+
+--#5 What is the average duration of all the songs, and what songs are more or less than that average?
+WITH avg_duration AS (
+     SELECT AVG(duration) AS average_duration
+     FROM songs)
+ 
+SELECT  artist, title, duration, duration - average_duration AS duration_difference
+FROM songs, avg_duration;
+
+
+
+--#6 How many songs have below average duration?
+WITH avg_duration AS (
+     SELECT AVG(duration) AS average_duration
+     FROM songs)
+ 
+SELECT  COUNT(artist), COUNT(title), AVG(duration), duration - average_duration AS duration_difference
+FROM songs, avg_duration
+WHERE duration_difference <=0;
+
+
+--#7 How many songs have above average duration?
+WITH avg_duration AS (
+     SELECT AVG(duration) AS average_duration
+     FROM songs)
+ 
+SELECT  COUNT(artist), COUNT(title), AVG(duration), duration - average_duration AS duration_difference
+FROM songs, avg_duration
+WHERE duration_difference >=0;
