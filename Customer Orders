@@ -1,4 +1,4 @@
-/*the below tables have been created using w3resources data from https://www.w3resource.com/sql/sql-table.php */
+/*the below tables have been created using w3resources data from https://www.w3resource.com/sql/sql-table.php */ 
 
 CREATE TABLE  "AGENTS" 
    (	
